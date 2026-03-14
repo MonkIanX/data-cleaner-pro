@@ -290,11 +290,12 @@ class DataCleaner:
         if pd.isna(value):
             return value
         email = str(value).strip().lower().replace('#', '@')
-        # 清洗后再验证格式
+        # 清洗后验证格式，不合法的记日志并返回 None
         valid_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(valid_pattern, email):
-            self.add_log(row_idx, col_name, str(value).strip(), email, 'invalid_email',
+            self.add_log(row_idx, col_name, str(value).strip(), None, 'invalid_email',
                          f'清洗后仍不是合法邮箱: {email}')
+            return None
         return email
 
     def clean_dataframe(self, df, field_types):
