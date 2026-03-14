@@ -33,7 +33,7 @@ Data Cleaner Pro
 安装依赖：
 pip install streamlit pandas openpyxl
 启动应用：
-streamlit run data_refinery.py
+streamlit run app.py
 浏览器会自动打开，默认地址为 http://localhost:8501
 
 使用步骤
