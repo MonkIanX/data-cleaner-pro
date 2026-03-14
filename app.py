@@ -558,14 +558,15 @@ def main():
             st.markdown(f"#### Found {len(filtered_logs)} anomalies")
 
             for log in filtered_logs:
+                import html as html_lib
                 issue_class = f"issue-{log['issue']}"
                 rule_html = f"""
                     <div>
                         <div style="color:#64748b;font-size:0.75rem;margin-bottom:0.25rem;">Rule</div>
-                        <code style="background:#dbeafe;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.7rem;">{log['rule']}</code>
+                        <code style="background:#dbeafe;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.7rem;">{html_lib.escape(str(log['rule']))}</code>
                     </div>
                 """ if log.get('rule') else ''
-                hint_html = f'<div style="margin-top:0.75rem;background:#fef3c7;padding:0.5rem;border-radius:4px;font-size:0.8rem;color:#92400e;">💡 {log["hint"]}</div>' if log.get('hint') else ''
+                hint_html = f'<div style="margin-top:0.75rem;background:#fef3c7;padding:0.5rem;border-radius:4px;font-size:0.8rem;color:#92400e;">💡 {html_lib.escape(str(log["hint"]))}</div>' if log.get('hint') else ''
 
                 st.markdown(f"""
                     <div class="anomaly-card">
